@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Hangman game</title>
 
 <!-- UIkit CSS -->
@@ -7,18 +8,80 @@
 <!-- UIkit JS -->
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.10.1/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.10.1/dist/js/uikit-icons.min.js"></script>
+<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
 <style>
     html {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-top: 100px;
+        padding-top: 10px;
         background: #2d3740;
         color: aliceblue;
     }
-
     h1, h2, h3 {
         color: aliceblue;
     }
+    body {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: #2d3740;
+        color: aliceblue;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1200px;
+    }
+    .score-section {
+        width: 30%;
+        padding: 20px;
+    }
+    .score-list {
+        height: 320px; 
+        overflow: hidden; 
+        position: relative;
+        animation: fadeIn 5s ease-out;
+    }
+    .score-list ul {
+        position: absolute;
+        width: 100%;
+        animation: scroll 180s linear infinite;
+        animation-delay: 5s;
+        display: flex; 
+        flex-direction: column; 
+    }
+    /* Animation pour l'apparition progressive */
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% {  opacity: 1; }
+    }
+    @keyframes scroll {
+        0% { transform: translateY(0%); }
+        100% { transform: translateY(-100%); }
+    }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fonction pour récupérer les scores d'hier
+        fetch('/yesterday-scores')  
+            .then(response => response.json())
+            .then(data => {
+                const yesterdayScoresList = document.getElementById('yesterday-scores').querySelector('ul');
+                yesterdayScoresList.innerHTML = data.map(score => `<li>${score.pseudo} ... ${score.score} points</li>`).join('');
+            });
+
+        // Fonction pour récupérer les scores d'aujourd'hui
+        fetch('/today-scores') 
+            .then(response => response.json())
+            .then(data => {
+                const todayScoresList = document.getElementById('today-scores').querySelector('ul');
+                todayScoresList.innerHTML = data.map(score => `<li>${score.pseudo} ... ${score.score} points</li>`).join('');
+            });
+        
+    });
+</script>

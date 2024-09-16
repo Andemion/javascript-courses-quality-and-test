@@ -1,0 +1,120 @@
+<meta charset="UTF-8">
+<title>The Hangman game</title>
+
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.10.1/dist/css/uikit.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/code-icons@1.0.5/lib/index.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/code-icons@1.0.5/styles.min.css">
+
+
+
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.10.1/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.10.1/dist/js/uikit-icons.min.js"></script>
+
+<style>
+    .box {
+        display: flex;
+    }
+
+    #checkbox {
+        width: 65px;
+        height: 65px;
+        cursor: pointer;
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        outline: none;
+        background: white;
+        position: relative;
+    }
+    #checkbox:hover {
+        background: rgba(255, 255, 255, .7);
+    }
+
+    #checkbox::before {
+        content: "\f14d";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'font awesome 5 free';
+        font-weight: 900;
+        font-size: 1.5rem;
+        color: rgb(41, 41, 41);
+        transition: all 1.5s;
+    }
+    #checkbox:checked::before {
+        content: '\f00d';
+    }
+    #checkbox:checked ~ .menu {
+        width: 264px;
+    }
+    .menu {
+        width: 0;
+        display: flex;
+        overflow: hidden;
+        transition: all .5s;
+    }
+    .menu .menuItems {
+        width: 65px;
+        height: 65px;
+        background: white;
+        border-left: 1px solid rgb(165, 165, 165);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu .menuItems:hover {
+        background: rgba(255, 255, 255, .7);
+    }
+    .menu .menuItems i {
+        font-size: 1.8rem;
+    }
+</style>
+
+<script>
+    // Fonction pour mettre à jour les scores d'aujourd'hui
+    function updateTodayScores() {
+        fetch('/today-scores')  
+            .then(response => response.json())
+            .then(data => {
+                const todayScoresList = document.getElementById('today-scores').querySelector('ul');
+                todayScoresList.innerHTML = data.map(score => `<li>${score.pseudo} - ${score.score}</li>`).join('');
+            })
+            .catch(error => console.error('Erreur lors de la mise à jour des scores :', error));
+    }
+
+    // Fonction pour afficher la popup demandant le pseudo
+    function askPseudoOnLoad() {
+        const pseudo = prompt("Bienvenue ! Veuillez entrer votre pseudo pour commencer le jeu :");
+        
+        const scoreElement = document.getElementById('score');
+        const scoreText = scoreElement.innerText; 
+        const score = scoreText.replace('Score final : ', '');
+
+        if (pseudo) {
+            alert("Bonjour " + pseudo + "! Votre pseudo a été enregistré.");
+            // Envoyer le pseudo au serveur (si nécessaire)
+            fetch('/save-pseudo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pseudo: pseudo, score: score })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Appeler la fonction pour mettre à jour les scores d'aujourd'hui
+                updateTodayScores();
+            })
+            .catch((error) => console.error('Erreur lors de l\'enregistrement du pseudo :', error));
+        } else {
+            alert("Vous n'avez pas entré de pseudo.");
+        }
+    }
+
+    // Appeler la fonction quand la page est complètement chargée
+    document.addEventListener('DOMContentLoaded', askPseudoOnLoad);
+</script>

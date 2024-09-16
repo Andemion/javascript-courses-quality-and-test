@@ -19,8 +19,11 @@
         background: #2d3740;
         color: aliceblue;
     }
-    h1, h2, h3 {
+    h1, h3 {
         color: aliceblue;
+    }
+    h2 {
+        color: rgb(224, 65, 158);
     }
     body {
         display: flex;
@@ -43,6 +46,13 @@
     }
     .score-list {
         height: 320px; 
+        border: rgb(201, 178, 190) ;
+        box-shadow: 0 -20px 25px -10px rgba(252, 5, 169, 0.3), /* top */
+                    20px 0 25px -10px rgba(252, 5, 169, 0.3), /* right */
+                    0 20px 25px -10px rgba(252, 5, 169, 0.3), /* bottom */
+                    -20px 0 25px -10px rgba(252, 5, 169, 0.3); /* left */
+        border-radius: 5% 5% 5% 5%;
+        border-style: solid;
         overflow: hidden; 
         position: relative;
         animation: fadeIn 5s ease-out;

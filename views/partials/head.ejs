@@ -57,7 +57,7 @@
         position: relative;
         animation: fadeIn 5s ease-out;
     }
-    .score-list ul {
+    .score-list ol {
         position: absolute;
         width: 100%;
         animation: scroll 180s linear infinite;
@@ -81,7 +81,7 @@
         fetch('/yesterday-scores')  
             .then(response => response.json())
             .then(data => {
-                const yesterdayScoresList = document.getElementById('yesterday-scores').querySelector('ul');
+                const yesterdayScoresList = document.getElementById('yesterday-scores').querySelector('ol');
                 yesterdayScoresList.innerHTML = data.map(score => `<li>${score.pseudo} ... ${score.score} points</li>`).join('');
             });
 
@@ -89,7 +89,7 @@
         fetch('/today-scores') 
             .then(response => response.json())
             .then(data => {
-                const todayScoresList = document.getElementById('today-scores').querySelector('ul');
+                const todayScoresList = document.getElementById('today-scores').querySelector('ol');
                 todayScoresList.innerHTML = data.map(score => `<li>${score.pseudo} ... ${score.score} points</li>`).join('');
             });
         

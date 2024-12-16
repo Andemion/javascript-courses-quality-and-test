@@ -24,8 +24,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       - name: Run Jest tests
         run: npm run test:unit
+        env:
+          CI: true
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
         env:
           CI: true
 
@@ -33,14 +41,6 @@ jobs:
         if: always()
         run: cat ./reports/jest/jest-results.xml || echo "No Jest results found"
         id: jest_summary
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Run Playwright tests
-        run: npm run test:e2e
-        env:
-          CI: true
 
       - name: Collect Playwright results
         if: always()

@@ -13,7 +13,7 @@ module.exports = {
 
   reporters: [
     'default',
-    ['@estruyf/github-actions-reporter', { name: 'Jest Tests' }]
+    ['@estruyf/github-actions-reporter', { name: 'Jest Tests', showAnnotations: false }]
   ],
 
 };

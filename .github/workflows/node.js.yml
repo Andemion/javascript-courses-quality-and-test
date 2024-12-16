@@ -55,4 +55,8 @@ jobs:
         run: |
           echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
           echo "### Playwright Results" >> $GITHUB_STEP_SUMMARY
-          cat ./reports/playwright/playwright-results.xml >> $GITHUB_STEP_SUMMARY || echo "No Playwright results available"
+          if [ -f ./reports/playwright/playwright-results.xml ]; then
+            cat ./reports/playwright/playwright-results.xml >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No Playwright results available" >> $GITHUB_STEP_SUMMARY
+          fi

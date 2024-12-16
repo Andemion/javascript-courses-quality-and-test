@@ -78,6 +78,7 @@ module.exports = defineConfig({
    webServer: {
     command: 'npm run start',
     url: 'http://127.0.0.1:3000',
+    timeout: 120 * 1000, // Temps maximal (2 minutes) pour que le serveur démarre
     reuseExistingServer: !process.env.CI,
   },
 });

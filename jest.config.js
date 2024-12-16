@@ -10,4 +10,9 @@ module.exports = {
     // Autres options Jest
     verbose: true, // Affiche des informations détaillées pendant les tests
     collectCoverage: true, // Active le rapport de couverture
+
+    reporters: [
+      'default',
+      ['jest-junit', { outputDirectory: './reports/jest', outputName: 'jest-results.xml' }]
+    ],
 };

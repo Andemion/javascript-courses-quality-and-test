@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'npm' # Cache npm dependencies
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -44,9 +44,14 @@ jobs:
       - name: Run Playwright tests
         run: npm run test:e2e
 
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+      - name: Collect Playwright results
+        if: always()
+        run: cat ./reports/playwright/playwright-results.xml || echo "No Playwright results found"
+        id: playwright_summary
+
+      - name: Generate Summary
+        if: always()
+        run: |
+          echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "### Playwright Results" >> $GITHUB_STEP_SUMMARY
+          cat ./reports/playwright/playwright-results.xml >> $GITHUB_STEP_SUMMARY || echo "No Playwright results available"

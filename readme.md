@@ -24,10 +24,23 @@ This will start the server, and you can play the game by visiting `http://localh
 This project uses Jest for testing. To run the tests, use the following command:
 
 ```bash
-npm test
+npm run test:unit
 ```
 
-The tests are designed to ensure that the game logic works correctly and to demonstrate best practices in test-driven development.
+This project uses playwright for test end to end. To run the tests, use the following command:
+
+```bash
+npm run test:e2e
+```
+To run all tests, use the following command:
+
+```bash
+npm run test:all
+```
+
+There the result of the last test.
+
+![Test Status](https://github.com/<OWNER>/<REPO>/actions/workflows/<WORKFLOW_FILE>.yml/badge.svg)
 
 ## Project Structure
 

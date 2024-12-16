@@ -97,19 +97,19 @@ class Game {
         }
     }
 
-    hightScoreGenerator(liste){
-        var x = liste.length;
+    hightScoreGenerator(list){
+        var x = list.length;
         
         while (x < 1000){
-            var pseudo = "player" + String(x);
-            var score = 500 - x
-            liste.push({ pseudo: pseudo, score: score })
+            var pseudo = "Player " + String(x);
+            var score = 900 - x
+            list.push({ pseudo: pseudo, score: score })
             x++
         }
 
-        liste.sort((a, b) => b.score - a.score);
+        list.sort((a, b) => b.score - a.score);
 
-        return liste;
+        return list;
     }
 
 }

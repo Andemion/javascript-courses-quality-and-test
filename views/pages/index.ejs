@@ -24,15 +24,14 @@
             <form action="/" method="post">
                 <fieldset class="uk-fieldset">
 
-                    <legend class="uk-legend">Nombre d'essai restant : <%= numberOfTries %></legend>
+                    <legend class="uk-legend" id="try_number">Nombre d'essai restant : <%= numberOfTries %></legend>
                     <legend class="uk-legend">Score actuel : <%= score %></legend>
                     
                     <div class="uk-margin">
-                        <input class="uk-input" type="text" name="word" placeholder="Tapez une lettre" maxlength="1">
+                        <input class="uk-input" type="text" name="word" placeholder="Tapez une lettre" maxlength="1" pattern="[a-zA-Z]" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')">
                     </div>
 
                     <div class="uk-margin">
-                        <!-- <button class="uk-input uk-button-danger uk-form-width-medium" type="submit" name="reset" value="true">Reset</button> -->
                         <button class="uk-input uk-button-secondary uk-form-width-medium" type="submit" value="form-success">Tester</button>
                     </div>
 

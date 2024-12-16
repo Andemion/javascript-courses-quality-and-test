@@ -1,3 +1,5 @@
+![Test Status](https://github.com/andemion/javascript-courses-quality-and-test/actions/workflows/node.js.yml/badge.svg)
+
 # Hangman Game
 
 This is a small project to build a classic Hangman game in JavaScript.
@@ -37,10 +39,6 @@ To run all tests, use the following command:
 ```bash
 npm run test:all
 ```
-
-There the result of the last test.
-
-![Test Status](https://github.com/andemion/javascript-courses-quality-and-test/actions/workflows/node.js.yml/badge.svg)
 
 ## Project Structure
 

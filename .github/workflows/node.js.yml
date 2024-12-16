@@ -30,13 +30,6 @@ jobs:
       - name: Display test results
         if: failure() # This step runs only if the tests fail
         run: cat ./test-results.txt || echo "No test results file found"
-      
-      - name: Start the server
-        run: npm start &
-        env:
-          NODE_ENV: test
-      - name: Wait for the server to be ready
-        run: npx wait-on http://localhost:3030
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps

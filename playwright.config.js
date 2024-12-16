@@ -25,7 +25,7 @@ module.exports = defineConfig({
     ['list'], // Affiche les résultats dans la console
     ['junit', { outputFile: './reports/playwright/playwright-results.xml' }] // Génère un rapport JUnit
   ],
-  
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -75,10 +75,10 @@ module.exports = defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+   webServer: {
+    command: 'npm run start',
+    url: 'http://127.0.0.1:3000',
+    reuseExistingServer: !process.env.CI,
+  },
 });
 

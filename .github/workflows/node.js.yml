@@ -44,19 +44,3 @@ jobs:
 
       - name: Run Playwright tests
         run: npm run test:e2e
-
-      - name: Collect Playwright results
-        if: always()
-        run: cat ./reports/playwright/playwright-results.xml || echo "No Playwright results found"
-        id: playwright_summary
-
-      - name: Generate Summary
-        if: always()
-        run: |
-          echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
-          echo "### Playwright Results" >> $GITHUB_STEP_SUMMARY
-          if [ -f ./reports/playwright/playwright-results.xml ]; then
-            cat ./reports/playwright/playwright-results.xml >> $GITHUB_STEP_SUMMARY
-          else
-            echo "No Playwright results available" >> $GITHUB_STEP_SUMMARY
-          fi

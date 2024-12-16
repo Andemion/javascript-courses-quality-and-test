@@ -26,8 +26,6 @@ jobs:
 
       - name: Run tests
         run: npm run test:unit
-        env:
-          CI: true
 
       - name: Collect Jest results
         if: always() # Ensure this runs even if Jest fails
@@ -47,8 +45,6 @@ jobs:
 
       - name: Run Playwright tests
         run: npm run test:e2e
-        env:
-          CI: true
 
       - name: Collect Playwright results
         if: always() # Ensure this runs even if Playwright fails

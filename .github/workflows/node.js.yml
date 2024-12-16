@@ -1,5 +1,5 @@
 name: Test
-concurrency: production
+concurrency: test-${{ github.ref }}
 
 on:
   push:
@@ -19,44 +19,47 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'npm' # Cache npm dependencies
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
+      - name: Run Jest tests
         run: npm run test:unit
+        env:
+          CI: true
 
       - name: Collect Jest results
-        if: always() # Ensure this runs even if Jest fails
-        run: cat ./reports/jest/jest-results.xml | grep -oP '(?<=testsuites tests=")[^"]+'
+        if: always()
+        run: cat ./reports/jest/jest-results.xml || echo "No Jest results found"
         id: jest_summary
-      
+
       - name: Start the server
         run: npm start &
         env:
           NODE_ENV: test
 
       - name: Wait for the server to be ready
-        run: npx wait-on http://localhost:3030
+        run: npx wait-on http://localhost:3030 --timeout 30000
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
         run: npm run test:e2e
+        env:
+          CI: true
 
       - name: Collect Playwright results
-        if: always() # Ensure this runs even if Playwright fails
-        run: cat ./reports/playwright/playwright-results.xml | grep -oP '(?<=testsuites tests=")[^"]+'
+        if: always()
+        run: cat ./reports/playwright/playwright-results.xml || echo "No Playwright results found"
         id: playwright_summary
-          
+
       - name: Generate Summary
         if: always()
         run: |
           echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
           echo "### Jest Results" >> $GITHUB_STEP_SUMMARY
-          cat ./reports/jest/jest-results.xml | grep '<testsuite' >> $GITHUB_STEP_SUMMARY
+          cat ./reports/jest/jest-results.xml >> $GITHUB_STEP_SUMMARY || echo "No Jest results available"
           echo "### Playwright Results" >> $GITHUB_STEP_SUMMARY
-          cat ./reports/playwright/playwright-results.xml | grep '<testsuite' >> $GITHUB_STEP_SUMMARY
-  
+          cat ./reports/playwright/playwright-results.xml >> $GITHUB_STEP_SUMMARY || echo "No Playwright results available"

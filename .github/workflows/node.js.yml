@@ -48,4 +48,10 @@ jobs:
         id: playwright_summary
 
       - name: Generate Summary
-        if: always() 
+        if: always()
+        run: |
+          echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "### Jest Results" >> $GITHUB_STEP_SUMMARY
+          cat ./reports/jest/jest-results.xml >> $GITHUB_STEP_SUMMARY || echo "No Jest results available"
+          echo "### Playwright Results" >> $GITHUB_STEP_SUMMARY
+          cat ./reports/playwright/playwright-results.xml >> $GITHUB_STEP_SUMMARY || echo "No Playwright results available"

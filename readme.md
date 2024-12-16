@@ -40,7 +40,7 @@ npm run test:all
 
 There the result of the last test.
 
-![Test Status](https://github.com/<OWNER>/<REPO>/actions/workflows/<WORKFLOW_FILE>.yml/badge.svg)
+![Test Status](https://github.com/andemion/javascript-courses-quality-and-test/actions/workflows/test.yml/badge.svg)
 
 ## Project Structure
 

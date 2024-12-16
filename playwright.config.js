@@ -23,7 +23,7 @@ module.exports = defineConfig({
   
   reporter: [
     ['list'], // Affiche les résultats dans la console
-    ['@estruyf/github-actions-reporter'] // Génère un rapport JUnit
+    ['@estruyf/github-actions-reporter', { name: 'playwright_tests'}] // Génère un rapport JUnit
   ],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */

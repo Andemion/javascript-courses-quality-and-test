@@ -10,4 +10,5 @@ module.exports = {
   // Autres options Jest
   verbose: true, // Affiche des informations détaillées pendant les tests
   collectCoverage: true, // Active le rapport de couverture
+  coverageReporters: ["json-summary"],
 };

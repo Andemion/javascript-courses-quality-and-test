@@ -1,5 +1,10 @@
 ## 🎮 Hangman Game  
 ![Test Status](https://github.com/andemion/javascript-courses-quality-and-test/actions/workflows/node.js.yml/badge.svg)
+![Branches](./badges/coverage-branches.svg)
+![Functions](./badges/coverage-functions.svg)
+![Lines](./badges/coverage-lines.svg)
+![Statements](./badges/coverage-statements.svg)
+![Coverage total](./badges/coverage-total.svg)
 
 Welcome to the **Hangman Game** project! This is a small but powerful implementation of the classic Hangman game written in **JavaScript**.  
 The primary goal is to practice **Test-Driven Development (TDD)** using **Jest** and end-to-end testing with **Playwright**.

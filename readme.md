@@ -26,7 +26,7 @@ The primary goal is to practice **Test-Driven Development (TDD)** using **Jest**
 
 ### Prerequisites
 
-1. Install **Node.js** (v20 or higher).
+1. Install **Node.js** **nvm use 22.12.0**.
 2. Clone the repository:
    ```bash
    git clone https://github.com/andemion/javascript-courses-quality-and-test.git

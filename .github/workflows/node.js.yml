@@ -29,9 +29,6 @@ jobs:
       
       - name: ⚙️ Generating coverage badges
         uses: jpb06/coverage-badges-action@latest
-          with:
-            coverage-summary-path: |
-              ./my-module/coverage/coverage-summary.json
 
       - name: Display test results
         if: failure() # This step runs only if the tests fail

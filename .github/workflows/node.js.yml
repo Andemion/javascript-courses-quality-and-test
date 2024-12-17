@@ -26,9 +26,6 @@ jobs:
 
       - name: Run tests
         run: npm run test:unit
-      
-      - name: ⚙️ Generating coverage badges
-        uses: jpb06/coverage-badges-action@latest
 
       - name: Display test results
         if: failure() # This step runs only if the tests fail
@@ -47,3 +44,6 @@ jobs:
 
       - name: Run Playwright tests
         run: npm run test:e2e
+
+      - name: ⚙️ Generating coverage badges
+        uses: jpb06/coverage-badges-action@latest
